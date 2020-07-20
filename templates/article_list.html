@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Articles{% endblock title %}
+{% block content %}
+{% for article in object_list %}
+<div class="card">
+    <div class="card-header">
+    <span class="font-weight-bold">{{ article.title }}</span> &middot;
+    <span class="text-muted">by {{ article.author }} |
+    {{ article.date }}</span>
+  </div>
+  <div class="card-body">
+    <img class="profile-pic" src='{{ article.profile_pic.url}}' width="200" height="200"><br>
+    <h3>REVIEW</h3><br>
+    {{ article.body }} 
+    
+  </div>
+  <div class="card-footer text-center text-muted"> 
+        <a href="{% url 'article_edit' article.pk %}">Edit</a> |
+         <a href="{% url 'article_delete' article.pk %}">Delete</a>
+  </div>
+</div>
+<br />
+<script type="text/javascript">
+    /* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+    (function(d, m){
+      var kommunicateSettings = {"appId":"fc2948a667f26b98b7a394aa647a3ca","popupWidget":true,"automaticChatOpenOnNavigation":true};
+      var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+      s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+      var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+      window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+</script>
+{% endfor %}
+{% endblock content %}
